@@ -19,6 +19,7 @@ describe("Integretation tests for CRUD operations connected to test postgres Db"
         expect(response.json()).toMatchObject(todo)
     })
 
+
     test("Should get a all items", async () => {
         const response = await app.inject({
           method: "GET",
@@ -27,6 +28,7 @@ describe("Integretation tests for CRUD operations connected to test postgres Db"
     
         expect(response.statusCode).toBe(200);
       });
+
 
 
     test("Should get a single item", async () => {
@@ -45,6 +47,8 @@ describe("Integretation tests for CRUD operations connected to test postgres Db"
         );
       });
 
+
+
     test("Should update an item", async () => {
         const item = {
           title: "Updated name",
@@ -61,6 +65,7 @@ describe("Integretation tests for CRUD operations connected to test postgres Db"
       });
 
 
+
       test("Should delete an item", async () => {
         const response = await app.inject({
           method: "DELETE",
@@ -69,12 +74,10 @@ describe("Integretation tests for CRUD operations connected to test postgres Db"
     
         expect(response.statusCode).toBe(200);
         expect(response.json()).toMatchObject({
-          message: "Item 6 deleted succesfully!",
-        });
+          message: "Item 6 deleted succesfully!",});
+
+
       });
-
-
-      
 
 })
 

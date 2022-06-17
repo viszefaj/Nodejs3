@@ -1,5 +1,5 @@
 ###GET ALL Todolist
-GET http://127.0.0.1:5000/v1 HTTP/1.1
+GET http://127.0.0.1:8080/v1 HTTP/1.1
 
 ###GET Single Todolist
 GET http://127.0.0.1:5000/v1/1 HTTP/1.1

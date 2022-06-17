@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   setup-web-app:
-    image: node:14.16.0
+    image: node:16.15.0
     working_dir: /usr/src/web-app
     entrypoint: [ 'npm', 'i' ]
     volumes:

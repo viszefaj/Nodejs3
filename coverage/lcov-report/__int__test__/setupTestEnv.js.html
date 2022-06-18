@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">69.56% </span>
+                <span class="strong">88.88% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>16/23</span>
+                <span class='fraction'>16/18</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">69.56% </span>
+                <span class="strong">88.88% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>16/23</span>
+                <span class='fraction'>16/18</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -99,12 +99,7 @@
 <a name='L34'></a><a href='#L34'>34</a>
 <a name='L35'></a><a href='#L35'>35</a>
 <a name='L36'></a><a href='#L36'>36</a>
-<a name='L37'></a><a href='#L37'>37</a>
-<a name='L38'></a><a href='#L38'>38</a>
-<a name='L39'></a><a href='#L39'>39</a>
-<a name='L40'></a><a href='#L40'>40</a>
-<a name='L41'></a><a href='#L41'>41</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L37'></a><a href='#L37'>37</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -122,30 +117,26 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const {build}=require('../src/app')
-var jest=require('jest')
-const env =require('../src/config/env')
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">let {build}=require('../src/app')
+let env =require('../src/config/env')
 &nbsp;
 const createTableSQL=
 "CREATE TABLE IF NOT EXISTS todo (id SERIAL,title VARCHAR(200),description VARCHAR(200),gross_amount NUMERIC,net_amount NUMERIC,excluded_vat_amount NUMERIC,PRIMARY KEY (id))"
@@ -155,32 +146,29 @@ const clearTableSQL="DELETE From todo";
 const insertFakeItemSQL="INSERT INTO todo(title,description,gross_amount,net_amount,excluded_vat_amount) VALUES ($1,$2,$3,$4,$5)";
 &nbsp;
 module.exports=function setupTestEnv(){
-    const app=build({logger:true},
+    let app=build({logger:true},
         {},
         {connectionString: env.POSTGRES_TEST_DB_CONNECTION_STRING}
         )
 &nbsp;
     beforeAll(async ()=&gt;{
-        jest.setTimeout(60000);
-<span class="cstat-no" title="statement not covered" >        await app.ready()</span>
-<span class="cstat-no" title="statement not covered" >        await app.pg.query(createTableSQL)</span>
+        await app.ready()
+        await app.pg.query(createTableSQL)
 <span class="cstat-no" title="statement not covered" >        await app.pg.query(clearTableSQL)</span>
-    })
+    },10000)
 &nbsp;
     beforeEach(<span class="fstat-no" title="function not covered" >as</span>ync ()=&gt;{
-<span class="cstat-no" title="statement not covered" >        jest.setTimeout(60000);</span>
 <span class="cstat-no" title="statement not covered" >        await app.pg.query(insertFakeItemSQL,["test item","this test item",20,16.67,3.33])</span>
-    })
+    },10000)
 &nbsp;
     afterEach(async ()=&gt;{
-        jest.setTimeout(60000);
-<span class="cstat-no" title="statement not covered" >        await app.pg.query(clearTableSQL)</span>
-    })
+      
+        await app.pg.query(clearTableSQL)
+    },10000)
 &nbsp;
     afterAll(async ()=&gt;{
-        jest.setTimeout(60000);
-<span class="cstat-no" title="statement not covered" >        app.close()</span>
-    })
+        app.close()
+    },10000)
 &nbsp;
     return app
 }</pre></td></tr></table></pre>
@@ -190,7 +178,7 @@ module.exports=function setupTestEnv(){
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Sat Jun 18 2022 11:59:30 GMT+0200 (Central European Summer Time)
+                at Sat Jun 18 2022 12:19:16 GMT+0200 (Central European Summer Time)
             </div>
         <script src="../prettify.js"></script>
         <script>

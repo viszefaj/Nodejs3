@@ -1,4 +1,4 @@
-let setupTestEnv =require ('./setupTestEnv')
+let setupTestEnv =require('./setupTestEnv')
 
 let app=setupTestEnv();
 

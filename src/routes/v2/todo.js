@@ -81,9 +81,9 @@ const todo_v2 = async (fastify,options,done)=>{
 
     fastify.put('/:id',async(request,reply)=>{
         try {
-            const {id}=request.params
-            const {title,description}=request.body
-            const {rows}=await fastify.pg.query("UPDATE todo SET title=$1,description=$2 WHERE id=$3 RETURNING *",[title,description,id])
+            var {id}=request.params
+            var {title,description}=request.body
+            var {rows}=await fastify.pg.query("UPDATE todo SET title=$1,description=$2 WHERE id=$3 RETURNING *",[title,description,id])
             reply.send(rows[0])
         } catch (error) {
             reply.send(error)
@@ -92,7 +92,7 @@ const todo_v2 = async (fastify,options,done)=>{
 
     fastify.delete("/:id",async(request,reply)=>{
         try {
-            const {id} =request.params
+            var {id} =request.params
             await fastify.pg.query("DELETE FROM todo WHERE id=$1",[id])
             reply.send(`Item with id: ${id} has been deleted`)
         } catch (error) {

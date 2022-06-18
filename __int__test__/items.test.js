@@ -1,6 +1,6 @@
-const setupTestEnv =require ('./setupTestEnv')
+let setupTestEnv =require ('./setupTestEnv')
 
-const app=setupTestEnv();
+let app=setupTestEnv();
 
 describe("Integretation tests for CRUD operations connected to test postgres Db",()=>{
     test("Should create an item via POST route",async()=>{
@@ -50,24 +50,25 @@ describe("Integretation tests for CRUD operations connected to test postgres Db"
 
 
     test("Should update an item", async () => {
-        const item = {
+        var todo = {
           title: "Updated name",
           description: "update description",
+          gross_amount:20,
         };
         const response = await app.inject({
           method: "PUT",
           url: "/v2/5",
-          payload: item,
+          payload: todo,
         });
     
         expect(response.statusCode).toBe(200);
-        expect(response.json()).toEqual(expect.objectContaining(item));
+        expect(response.json()).toEqual(expect.objectContaining(todo));
       });
 
 
 
       test("Should delete an item", async () => {
-        const response = await app.inject({
+        var response = await app.inject({
           method: "DELETE",
           url: "/v2/6",
         });

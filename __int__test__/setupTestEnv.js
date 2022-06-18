@@ -1,5 +1,5 @@
 const {build}=require('../src/app')
-
+const jest =require('jest')
 const env =require('../src/config/env')
 
 const createTableSQL=
@@ -10,24 +10,30 @@ const clearTableSQL="DELETE From todo";
 const insertFakeItemSQL="INSERT INTO todo(title,description,gross_amount,net_amount,excluded_vat_amount) VALUES ($1,$2,$3,$4,$5)";
 
 module.exports=function setupTestEnv(){
-    const app=build({logger:true},{},
-        {connectionString: env.POSTGRES_TEST_DB_CONNECTION_STRING})
+    const app=build({logger:true},
+        {},
+        {connectionString: env.POSTGRES_TEST_DB_CONNECTION_STRING}
+        )
 
-    beforeAll(async()=>{
+    beforeAll(async ()=>{
+        jest.setTimeout(60000);
         await app.ready()
         await app.pg.query(createTableSQL)
         await app.pg.query(clearTableSQL)
     })
 
-    beforeEach(async()=>{
+    beforeEach(async ()=>{
+        jest.setTimeout(60000);
         await app.pg.query(insertFakeItemSQL,["test item","this test item",20,16.67,3.33])
     })
 
-    afterEach(async()=>{
+    afterEach(async ()=>{
+        jest.setTimeout(60000);
         await app.pg.query(clearTableSQL)
     })
 
-    afterAll(async()=>{
+    afterAll(async ()=>{
+        jest.setTimeout(60000);
         app.close()
     })
 

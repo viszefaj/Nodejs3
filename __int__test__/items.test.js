@@ -34,7 +34,7 @@ describe("Integretation tests for CRUD operations connected to test postgres Db"
     test("Should get a single item", async () => {
         const response = await app.inject({
           method: "GET",
-          url: "/v2/2",
+          url: "/v2/1",
         });
     
         expect(response.statusCode).toBe(200);
@@ -57,7 +57,7 @@ describe("Integretation tests for CRUD operations connected to test postgres Db"
         };
         const response = await app.inject({
           method: "PUT",
-          url: "/v2/5",
+          url: "/v2/2",
           payload: todo,
         });
     
@@ -70,7 +70,7 @@ describe("Integretation tests for CRUD operations connected to test postgres Db"
       test("Should delete an item", async () => {
         var response = await app.inject({
           method: "DELETE",
-          url: "/v2/6",
+          url: "/v2/3",
         });
     
         expect(response.statusCode).toBe(200);
